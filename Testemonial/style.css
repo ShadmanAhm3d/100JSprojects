@@ -1,0 +1,52 @@
+*{
+  margin: 0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+.testemonials{
+  height:35vh;
+  width: 65vw;
+
+}
+.testemonials{
+  overflow: hidden;
+  margin:auto;
+  /* border : 2px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display:none
+
+}
+
+.testemonials.displayTestemonial{
+  display: block;
+}
+
+#imageSection{
+  height: 35%;
+  width:10%;
+  margin:auto;
+  border : 2px solid purple;
+  position : relative;
+  top: 2rem;
+}
+
+#imageSection img{
+  height: 100%;
+  width:100%;
+  object-fit:cover
+}
+
+#cardInfo{
+  height: 100%;
+  width: 100%;
+  border : 2px solid black;
+}
+
+#cardInfo p {
+  padding: 2rem;
+  margin: 2rem;
+}
+
