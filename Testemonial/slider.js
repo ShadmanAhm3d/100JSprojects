@@ -31,7 +31,7 @@ function initializer(){
   setInterval(() => {
   testemonialsIndex++;
   showTestemonials(testemonialsIndex);
-  }, 1000);
+  }, 5000);
 }
 
 
