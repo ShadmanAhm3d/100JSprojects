@@ -23,6 +23,12 @@ function calculateAge () {
   const monthSelected = Number(date_splitted[1]);
   const dateSelected = Number(date_splitted[2]);
 
+
+  if (yearSelected >= current_year && monthSelected > current_month){
+    return "Select Valid Date nigga"
+  }
+
+
   console.log(`User  ${yearSelected} year , ${monthSelected} month , ${dateSelected} date`)
 
   const result = `You are ${current_year - yearSelected} years ${monthSelected - current_month} months , ${dateSelected - current_date} days old`
