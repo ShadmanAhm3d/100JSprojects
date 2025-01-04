@@ -5,9 +5,10 @@ const amount_tip = document.querySelector("#amount_tip")  ;
 
 
 function calculateTotal(){
-  const amount1 = amount_id.value;
-  const amount2 = amount_tip.value;
+  const amount1 = Number(amount_id.value); //string
+  const amount2 = +amount_tip.value; //number
    
+  console.log(typeof(amount2))
   const answer = amount1 + amount2 ;
 
   const totalh2 = document.querySelector("#totalh2");
@@ -15,7 +16,11 @@ function calculateTotal(){
 
 }
 
-function handlesubmit(){
+const form = document.querySelector("form")
+form.addEventListener("submit",function (event){
+event.preventDefault();
   calculateTotal();
-  console.log("Submitted")
-}
+})
+
+
+
