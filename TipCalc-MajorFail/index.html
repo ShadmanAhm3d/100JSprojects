@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Something</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="heading_section">
+        <h2>Tip Calculator</h2>
+      </div>
+
+      <div class="form_inside">
+        <p>Enter ths bill amount</p>
+
+        <form onsubmit="handlesubmit()">
+          <div>
+            <lable id="amount">Bill amount</lable>
+            <input type="number" name="amount" id="amount_id"" />
+          </div>
+          <div>
+            <lable id="tip">Tip amount</lable>
+            <input type="number" name="tip" id="amount_tip" />
+          </div>
+
+          <button id="btn-submit" type="">Submit</button>
+        </form>
+      </div>
+
+
+      <div id="total">
+        <h2 id="totalh2"></h2>
+      </div>
+    </div>
+
+
+    <script src="slider.js"></script>
+
+  </body>
+</html>
