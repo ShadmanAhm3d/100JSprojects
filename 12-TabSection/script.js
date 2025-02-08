@@ -14,8 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Event delegation - single event listener
   document.querySelector(".buttons-tabs").addEventListener("click", (e) => {
+
+    console.log(e);
     if (e.target.tagName === "BUTTON") {
+      console.log(e.target.tagName)
       const index = [...buttons].indexOf(e.target);
+      console.log(index);
       updateDOM(index);
     }
   });
