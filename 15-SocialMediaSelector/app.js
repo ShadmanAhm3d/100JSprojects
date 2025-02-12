@@ -1,8 +1,18 @@
-const first = document.getElementById("first");
+const menuEl = document.querySelector(".menu");
+const menuText = document.querySelector(".menu p");
 
-const value = document.querySelectorAll(".value");
+const socialList = document.querySelector(".social-list");
+const liEls = document.querySelectorAll(".social-list li");
 
+menuEl.addEventListener("click", function () {
+  socialList.classList.toggle("hide");
+  menuEl.classList.toggle("rotate");
+});
 
-console.log(value); //why is this not returning a all the elements
-console.log(first);
-
+liEls.forEach((curr) => {
+  curr.addEventListener("click", () => {
+    menuText.innerHTML = curr.innerHTML;
+    socialList.classList.toggle("hide");
+    menuEl.classList.toggle("rotate");
+  });
+});

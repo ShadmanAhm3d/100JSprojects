@@ -3,27 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title></title>
+    <title>Social Media Selector Menu</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link href="index.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="main-container">
-      <div class="dropdown-menu">
-        <div class="selected">Select an option</div>
-        <div class="option">
-          <p class="icon">&#xEA6F;</p>
-          <p class="value">Facebook</p>
-        </div>
-        <div class="option">
-          <p class="icon">&#xEA6F;</p>
-          <p class="value">Instagram</p>
-        </div>
-        <div class="option">
-          <p class="icon">&#xEA6F;</p>
-          <p class="value">Twitter</p>
-        </div>
-      </div>
+    <div class="menu">
+      <p>Social Media Selector</p>
+      <i class="fas fa-angle-down"></i>
     </div>
+
+    <ul class="social-list hide">
+      <li>
+        <i class="fab fa-facebook" style="color: blue"></i>
+        <p>Facebook</p>
+      </li>
+
+      <li>
+        <i class="fab fa-youtube" style="color: red"></i>
+        <p>YouTube</p>
+      </li>
+      <li>
+        <i class="fab fa-twitter" style="color: blue"></i>
+        <p>Twitter</p>
+      </li>
+      <li>
+        <i class="fab fa-linkedin" style="color: blue"></i>
+        <p>Linkedin</p>
+      </li>
+    </ul>
+
     <script src="app.js"></script>
   </body>
 </html>
