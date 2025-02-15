@@ -1,0 +1,45 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+
+
+.container{
+  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:relative;
+}
+.card{
+
+  height:40vh;
+  width:50vw;
+  border:1px solid slateblue;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  gap:1rem;
+  align-items: center;
+  background: pink;
+}
+#input{
+  height:3rem;
+  width: 500px;
+  padding:1rem;
+  font-size:1.5rem;
+  border-radius:10px;
+  border:1px solid;
+}
+
+.pop{
+  height: 40px;
+  width: 300px;
+  background-color:lightgreen;
+  border-radius:10px;
+  padding:0.5rem;
+  position:absolute;
+  bottom:10px;
+  left:10px;
+}
