@@ -13,15 +13,21 @@ function generatePassword() {
   }
   input.value = randomPassword;
   console.log(randomPassword);
- showPopup(randomPassword);
+  showPopup(randomPassword);
 }
 
 function showPopup(randomPassword) {
-  const p = document.getElementById("popup") ;
+  const p = document.getElementById("popup");
+  const pDiv = document.querySelector(".pop");
+
+  pDiv.classList.remove("hide");
+
+  setTimeout(()=>{
+    pDiv.classList.add("hide");
+  },5000);
 
   p.textContent = randomPassword;
   console.log(p);
-
 }
 
 //generate a random ass text of size 10
