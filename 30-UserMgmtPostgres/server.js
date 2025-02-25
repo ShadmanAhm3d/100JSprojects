@@ -1,11 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
 const { Pool } = require("pg");
 
 const app = express();
-
 const PORT = 3000;
+
 app.use(bodyParser.json());
 
 const pool = new Pool({
@@ -16,34 +15,29 @@ const pool = new Pool({
   port: 5432,
 });
 
+// ✅ Add a new user
 app.post("/api/addUser", async (req, res) => {
   const { name, email, age } = req.body;
   if (!name || !email || !age) {
     return res.status(400).json({ error: "Name, age, and email are required" });
   }
   try {
-    const emailCheck = await pool.query(
-      "SELECT * FROM users WHERE email = $1",
-      [email],
-    );
-
+    // Check if email already exists
+    const emailCheck = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
     if (emailCheck.rows.length > 0) {
-      return res
-        .status(400)
-        .json({ error: "Email already exists. Please use a different email." });
+      return res.status(400).json({ error: "Email already exists. Please use a different email." });
     }
 
+    // Insert new user
     const result = await pool.query(
-      "INSERT INTO users (name,age,email) values ($1,$2,$3) RETURNING *",
-      [name, age, email],
+      "INSERT INTO users (name, age, email) values ($1, $2, $3) RETURNING *",
+      [name, age, email]
     );
-    console.log("RES: ", result);
-    const newUser = result.rows[0];
-    console.log(newUser);
 
     res.status(200).json({
-      msg: result.rows,
+      msg: "User added successfully",
       success: true,
+      user: result.rows[0]
     });
   } catch (error) {
     console.error("Error inserting user:", error);
@@ -51,69 +45,91 @@ app.post("/api/addUser", async (req, res) => {
   }
 });
 
-app.get("/api/getUser", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT * FROM users");
-    console.log("Result : ");
-
-    console.log(result.rows);
-
-    res.status(201).json({
-      msg: result.rows,
-      success: true,
-    });
-  } catch (error) {
-    console.error("Error inserting user:", error);
-    res.status(500).json({ error: "Internal server error" });
+// ✅ Add or update user address
+app.post("/api/addAddress", async (req, res) => {
+  const { email, street, city, state, country } = req.body;
+  if (!email || !street || !city || !state || !country) {
+    return res.status(400).json({ error: "All address fields are required" });
   }
-});
 
-app.post("/api/updateUser", async (req, res) => {
   try {
-    const { oldEmail, name, age, email, gender } = req.body;
+    // Check if user exists
+    const userCheck = await pool.query("SELECT id FROM users WHERE email = $1", [email]);
 
-    // Validate oldEmail
-    if (!oldEmail) {
-      return res.status(400).json({
-        msg: "oldEmail is required",
-        success: false,
-      });
+    if (userCheck.rows.length === 0) {
+      return res.status(404).json({ error: "User not found" });
     }
 
-    // Check if user exists
-    const result = await pool.query("SELECT * FROM users WHERE email = $1", [
-      oldEmail,
-    ]);
+    const userId = userCheck.rows[0].id;
 
-    if (result.rows.length > 0) {
-      // User exists, update the user
-      const updatedUser = await pool.query(
-        "UPDATE users SET name = $1, age = $2, email = $3, gender = $4 WHERE email = $5 RETURNING *",
-        [name, age, email, gender, oldEmail],
+    // Check if user already has an address
+    const addressCheck = await pool.query("SELECT * FROM addresses WHERE user_id = $1", [userId]);
+
+    if (addressCheck.rows.length > 0) {
+      // Update existing address
+      const updatedAddress = await pool.query(
+        "UPDATE addresses SET street = $1, city = $2, state = $3, country = $4 WHERE user_id = $5 RETURNING *",
+        [street, city, state, country, userId]
       );
 
-      console.log("Updated User --> ", updatedUser.rows[0]);
-      res.status(200).json({
-        msg: "User updated successfully",
+      return res.status(200).json({
+        msg: "Address updated successfully",
         success: true,
-        user: updatedUser.rows[0], // Send the updated user data
+        address: updatedAddress.rows[0]
       });
     } else {
-      // User does not exist
-      res.status(404).json({
-        msg: "User does not exist",
-        success: false,
+      // Insert new address
+      const newAddress = await pool.query(
+        "INSERT INTO addresses (user_id, street, city, state, country) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+        [userId, street, city, state, country]
+      );
+
+      return res.status(201).json({
+        msg: "Address added successfully",
+        success: true,
+        address: newAddress.rows[0]
       });
     }
   } catch (error) {
-    console.error("Error updating user:", error);
-    res.status(500).json({
-      msg: "Internal Server Error",
-      success: false,
-      error: error.message, // Optional: Send the error message to the client
-    });
+    console.error("Error adding/updating address:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
+
+// ✅ Get user with address
+app.get("/api/getUserWithAddress", async (req, res) => {
+  const { email } = req.query;
+  if (!email) {
+    return res.status(400).json({ error: "Email is required" });
+  }
+
+  try {
+    const result = await pool.query(
+      `SELECT users.id, users.name, users.age, users.email, 
+              addresses.street, addresses.city, addresses.state, addresses.country
+       FROM users 
+       LEFT JOIN addresses ON users.id = addresses.user_id
+       WHERE users.email = $1`,
+      [email]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json({
+      msg: "User data retrieved",
+      success: true,
+      user: result.rows[0]
+    });
+  } catch (error) {
+    console.error("Error retrieving user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// ✅ Start server
 app.listen(PORT, () => {
   console.log(`SERVER ON ${PORT}`);
 });
+
