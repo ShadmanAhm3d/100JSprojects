@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* html,body{
+  height: 100vh;
+  width: 100vw;
+} */
+
+.main{
+
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+}
+
+#mouse-x{
+  height: 200px;
+  width: 200px;
+  border:1px solid salmon;
+
+}
+
+#mouse-y{
+  height: 200px;
+  width: 200px;
+  border:1px solid salmon;
+}
