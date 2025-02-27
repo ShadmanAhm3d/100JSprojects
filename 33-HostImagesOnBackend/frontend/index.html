@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <style>
+     *{
+       margin:0;
+       padding:0;
+       box-sizing: border-box;
+     }
+
+     .main-container{
+       height: 100vh;
+       width:100vw;
+       background-color:#212121;
+       
+       display:flex;
+       align-items: center;
+       justify-content:center;
+     }
+
+     .imageSection{
+       height: 500px;
+       width: 500px;
+       border:1px solid white;
+       display:flex;
+       align-items: center;
+       justify-content:center;
+     }
+
+     .imageCard{
+       height: 100%;
+       width:40%;
+       border:1px dotted salmon;
+     }
+     .uploadImage{
+       height: 100%;
+       width:60%;
+       background-color: darkseagreen;
+     }
+
+     #profilePic{
+       height: 30%;
+       width: 100%;
+       border:2px solid red;
+     }
+
+     #input{
+       padding:2rem;
+     }
+
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="imageSection">
+        <div class="imageCard">
+          <img src="" alt="" id="profilePic">
+        </div>
+        <div class="uploadImage">
+          <div>
+            <input type="file" id="input">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
