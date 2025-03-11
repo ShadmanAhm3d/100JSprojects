@@ -8,7 +8,7 @@ function App() {
       <Sidebar />
 
       <div className="w-4/5 h-screen overflow-y-auto">
-        <div className="searchbar sticky top-0 text-dark bg-lime-300 w-full h-32">
+        <div className="searchbar  text-dark bg-lime-300 w-full h-32">
         </div>
         <div className="main-content w-full flex flex-col space-y-4 items-center justify-center">
           <Cards />
