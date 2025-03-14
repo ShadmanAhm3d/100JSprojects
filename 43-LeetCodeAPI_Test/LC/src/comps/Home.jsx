@@ -11,15 +11,26 @@ const Home = () => {
   });
 
   const onChangeHandler = (e) => {
+    console.log(e);
     const { id, name, value, type, checked } = e.target;
 
     if (type === "checkbox") {
-      setData((prevData) => ({
-        ...prevData,
-        subject: checked
-          ? [...prevData.subject, value] // Add to array if checked
-          : prevData.subject.filter((subject) => subject !== value), // Remove if unchecked
-      }));
+      setData((prevData) => {
+        let newSubjects;
+
+        if (checked) {
+          // If checked → Add to array
+          newSubjects = [...prevData.subject, value];
+        } else {
+          // If unchecked → Remove from array
+          newSubjects = prevData.subject.filter((subject) => subject !== value);
+        }
+
+        return {
+          ...prevData,
+          subject: newSubjects,
+        };
+      });
     } else {
       setData((prevData) => ({
         ...prevData,
