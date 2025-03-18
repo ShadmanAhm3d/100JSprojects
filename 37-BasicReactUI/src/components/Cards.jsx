@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaUser, FaMapMarkerAlt, FaClock, FaPhone } from "react-icons/fa";
+import PhoneModal from "./PhoneModal";
 
 const Cards = ({ user }) => {
-  return (
-    <div className="max-w-lg  w-1/3 bg-gray-900 text-white p-4 rounded-xl shadow-lg border border-gray-700 hover:shadow-2xl transition-all duration-300">
+  const [isPhonemodal, setIsPhonemodal] = useState(false);
+
+  const modalHandler = () => {
+    console.log("handler lcick");
+
+    setIsPhonemodal((prev) => !prev);
+    console.log(isPhonemodal);
+  };
+
+  return isPhonemodal ? (
+    <PhoneModal onClose={modalHandler} />
+  ) : (
+    <div className="max-w-lg w-1/3 bg-gray-900 text-white p-4 rounded-xl shadow-lg border border-gray-700 hover:shadow-2xl transition-all duration-300">
       {/* Header Section */}
       <div className="flex items-center gap-4">
         {/* User Profile Image */}
         <div className="w-12 h-12 rounded-full bg-gray-700 overflow-hidden">
           {user.profileImage ? (
-            <img src={user.profileImage} alt="User" className="w-full h-full object-cover" />
+            <img
+              src={user.profileImage}
+              alt="User"
+              className="w-full h-full object-cover"
+            />
           ) : (
             <FaUser className="text-gray-400 text-2xl mx-auto mt-3" />
           )}
@@ -27,7 +43,9 @@ const Cards = ({ user }) => {
 
       {/* Service & Location */}
       <div className="mt-3 text-gray-300 flex justify-between text-sm">
-        <span className="bg-blue-600 px-3 py-1 rounded-full text-xs">{user.serviceType}</span>
+        <span className="bg-blue-600 px-3 py-1 rounded-full text-xs">
+          {user.serviceType}
+        </span>
         <div className="flex items-center gap-1">
           <FaMapMarkerAlt className="text-red-400" />
           <span>{user.location}</span>
@@ -37,7 +55,11 @@ const Cards = ({ user }) => {
       {/* Post Image (If available) */}
       {user.postImage && (
         <div className="mt-4 rounded-lg overflow-hidden">
-          <img src={user.postImage} alt="Post" className="w-full h-40 object-cover" />
+          <img
+            src={user.postImage}
+            alt="Post"
+            className="w-full h-40 object-cover"
+          />
         </div>
       )}
 
@@ -46,7 +68,10 @@ const Cards = ({ user }) => {
         <button className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
           View Profile
         </button>
-        <button className="bg-green-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-green-500 transition">
+        <button
+          onClick={modalHandler}
+          className="bg-green-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-green-500 transition"
+        >
           <FaPhone /> View Number
         </button>
       </div>
@@ -65,8 +90,5 @@ const sampleUser = {
 };
 
 export default function App() {
-  return (
-      <Cards user={sampleUser} />
-  );
+  return <Cards user={sampleUser} />;
 }
-

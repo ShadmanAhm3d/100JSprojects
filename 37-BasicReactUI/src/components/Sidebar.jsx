@@ -20,7 +20,7 @@ const Sidebar = () => {
         <nav>
           <ul className="space-y-4">
             <li>
-              <Link to="/profile/:id" className="flex items-center py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-200">
+              <Link to="/profile" className="flex items-center py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-200">
                 <User className="mr-3 h-5 w-5 text-blue-400" />
                 <span>Profile</span>
               </Link>

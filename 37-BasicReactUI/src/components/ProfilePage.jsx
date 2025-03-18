@@ -1,79 +1,95 @@
 import React, { useState } from "react";
-import { User, MapPin, Briefcase, Calendar, Mail, Phone, Edit, Save, Camera } from "lucide-react";
+import {
+  User,
+  MapPin,
+  Briefcase,
+  Calendar,
+  Mail,
+  Phone,
+  Edit,
+  Save,
+  Camera,
+} from "lucide-react";
 
 const ProfilePage = () => {
-  const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
-    name: "Neon Cyber",
+    name: "Shadman Ahmed",
     age: 28,
     email: "cyberpunk@example.com",
     phone: "91798682374",
     address: "Night City, Sector 7",
     serviceType: "Hacker & Designer",
-    bio: "Cybernetic artist and hacker, blending digital and analog aesthetics to create immersive designs."
+    bio: "Cybernetic artist and hacker, blending digital and analog aesthetics to create immersive designs.",
+    image: "https://picsum.photos/1200/300",
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProfileData({
-      ...profileData,
-      [name]: value
-    });
-  };
-
-  const toggleEdit = () => setIsEditing(!isEditing);
-
   return (
-    <div className="min-h-screen bg-black text-white p-6 flex justify-center items-center">
-      <div className="max-w-3xl w-full bg-gray-900 rounded-2xl shadow-xl border border-neon-green p-8 relative">
-        {/* Profile Header */}
-        <div className="relative h-48 w-full bg-gradient-to-r from-neon-blue to-neon-pink rounded-t-2xl flex justify-center items-center">
-          <h1 className="text-4xl font-bold tracking-wide text-white neon-glow">Profile</h1>
-        </div>
-
-        {/* Profile Image */}
-        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-32 h-32 border-4 border-neon-green rounded-full overflow-hidden shadow-lg">
+    <div className="main">
+      <div className="upperpart relative">
+        <div className="imageholder h-32 border border-black">
           <img
-            src="https://source.unsplash.com/100x100/?cyberpunk,avatar"
-            alt="Profile"
-            className="w-full h-full object-cover"
+            src={profileData.image}
+            alt=""
+            className="object-cover h-full w-full"
+          />
+        </div>
+      </div>
+      <div className="avatar absolute top-20 left-80 ">
+        <div className="w-24 rounded-full">
+          <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+        </div>
+      </div>{" "}
+      <div className="mid mt-16  flex flex-col gap-6 items-center justify-center border border-red-500">
+        <h1 className="text-3xl">{profileData.name}</h1>
+        <h1 className="text-2xl">{profileData.serviceType}</h1>
+      </div>
+      {/* Change Information Section */}
+      <div className="border border-pink-500 flex justify-center m-auto px-12  flex-col gap-12">
+        <div className="name">
+          <legend className="fieldset-legend">Name </legend>
+          <input
+            type="text"
+            placeholder="Large"
+            className="input input-lg border"
+            value={profileData.name}
+
+          />{" "}
+        </div>
+        <div className="serviceType">
+          <legend className="fieldset-legend">ServiceType </legend>
+          <input
+            type="text"
+            placeholder="Primary"
+            className="input input-primary  border"
+            value={profileData.serviceType}
           />
         </div>
 
-        {/* Profile Details */}
-        <div className="mt-20 space-y-4 text-center">
-          <h2 className="text-2xl font-bold text-neon-green">{profileData.name}</h2>
-          <p className="text-neon-pink">{profileData.serviceType}</p>
+        <div className="email">
+          <legend className="fieldset-legend">Email </legend>
+          <input
+            type="email"
+            placeholder="Primary"
+            className="input input-primary border"
+            value={profileData.email}
+          />
         </div>
 
-        {/* Contact Info */}
-        <div className="mt-6 grid grid-cols-2 gap-6 text-center text-gray-300">
-          <div className="flex flex-col items-center">
-            <Mail className="text-neon-blue" />
-            <p>{profileData.email}</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <Phone className="text-neon-pink" />
-            <p>{profileData.phone}</p>
-          </div>
+        <div className="age">
+          <legend className="fieldset-legend ">Age </legend>
+          <input
+            type="email"
+            placeholder="Primary"
+            className="input input-primary border"
+          />
         </div>
 
-        {/* Bio */}
-        <div className="mt-6 bg-gray-800 p-4 rounded-lg border border-neon-blue">
-          <p className="text-gray-300 text-sm leading-relaxed">{profileData.bio}</p>
-        </div>
-
-        {/* Buttons */}
-        <div className="mt-6 flex justify-center gap-4">
-          <button
-            onClick={toggleEdit}
-            className="bg-neon-green px-6 py-2 text-black font-semibold rounded-lg shadow-md hover:bg-neon-blue hover:text-white transition duration-300">
-            <Edit className="w-5 h-5 inline-block mr-2" /> Edit Profile
-          </button>
-          <button
-            className="bg-neon-pink px-6 py-2 text-black font-semibold rounded-lg shadow-md hover:bg-neon-blue hover:text-white transition duration-300">
-            <Save className="w-5 h-5 inline-block mr-2" /> Save
-          </button>
+        <div className="something">
+          <legend className="fieldset-legend">Something </legend>
+          <textarea
+            placeholder="Bio"
+            className="textarea textarea-md border"
+          ></textarea>{" "}
         </div>
       </div>
     </div>
@@ -81,12 +97,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-
-// Tailwind Custom Styles (to be added in global.css)
-// .neon-glow { text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc; }
-// .border-neon-green { border-color: #00ffcc; }
-// .border-neon-blue { border-color: #0077ff; }
-// .bg-neon-green { background-color: #00ffcc; }
-// .bg-neon-pink { background-color: #ff0077; }
-// .bg-neon-blue { background-color: #0077ff; }
-
