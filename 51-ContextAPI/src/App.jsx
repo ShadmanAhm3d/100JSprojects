@@ -8,16 +8,16 @@ import PublicRoute from "./Comp/PublicRoute";
 import DashBoard from "./Comp/DashBoard";
 import { PewContext } from "./context/Pew";
 import { PewProvider } from "./context/Pew";
+import { Context_CounterProvider, CounterContext } from "./context/Counter";
 
 function App() {
   return (
     <Routes>
+      {/*
       <Route element={<PublicRoute />}>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Route>
-      {/* Protected Routes */}
-      <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Home />} />
         <Route
           path="/dashboard"
@@ -28,6 +28,16 @@ function App() {
           }
         />
       </Route>
+      */}
+
+      <Route
+        path="/"
+        element={
+          <Context_CounterProvider>
+            <Home />
+          </Context_CounterProvider>
+        }
+      />
     </Routes>
   );
 }

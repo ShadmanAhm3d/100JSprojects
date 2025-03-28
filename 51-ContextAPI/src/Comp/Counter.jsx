@@ -4,6 +4,7 @@ import { CounterContext } from '../context/Counter'
 const Counter = () => {
   
   const contextofCounter = useContext(CounterContext);
+  console.log(contextofCounter);
 
   const increaseCount = ()=>{
     contextofCounter.setCount(()=>contextofCounter.count+1);
