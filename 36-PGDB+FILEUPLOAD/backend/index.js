@@ -4,6 +4,7 @@ import pkg from "pg";
 const { Pool } = pkg;
 import { cloudinary, upload } from "./utils/multerAndCloudinary.js";
 import fs from "fs";
+import { log } from "console";
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -150,7 +151,6 @@ app.post(
 
       if (checkUser.rows.length < 1) {
         return res.status(404).json({
-          // Fix: Use 404 for "User not found"
           msg: "User does not exist",
           success: false,
         });
@@ -169,6 +169,7 @@ app.post(
       fs.unlinkSync(req.file.path);
 
       const dbUploader = result.secure_url; // ✅ Fixed variable name
+      console.log(dbUploader);
 
       // 🛠️ Update user profile picture URL in DB
       const updateProfile = await pool.query(
