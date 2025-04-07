@@ -470,7 +470,7 @@ const ProfilePage = () => {
                       <input
                         type={type}
                         name={name}
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full border border-blue-800 rounded-md"
                         value={profileData[name]}
                         onChange={handleChange}
                         required={required}

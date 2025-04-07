@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Login from "./components/Login";
 import ProfilePage from "./components/ProfilePage";
 import ProfilePage_OtherUser from "./components/ProfilePage_OtherUser";
+import Testemonials from "./components/Testemonials";
 
 function App() {
   //yaha check karo isUserLoggedIN or not and ushi hisaab se setIsAuthenticated to change karo
@@ -31,6 +32,7 @@ function App() {
             <Route index element={<Home setAuth={setIsAuthenticated} />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/users/:id" element={<ProfilePage_OtherUser/>} />
+            <Route path="/testimonials" element={<Testemonials/>} />
           </Route>
         </Route>
         {/* These pages are outside the Layout */}

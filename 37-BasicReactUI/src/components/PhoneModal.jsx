@@ -10,7 +10,7 @@ const PhoneModal = ({ onClose }) => {
         >
           Close
         </button>
-        <h1 className="text-white text-xl">This is my Phone Number</h1>
+        <h1 className="text-white text-xl">This is my Phone Number : +917986757993 </h1>
       </div>
     </div>
   );
